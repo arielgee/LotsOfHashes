@@ -1,0 +1,6 @@
+[plugininstall]
+description=LotsOfHashes v1.4 - Content-plugin to calculate hash values for any file.
+type=wdx
+file=LotsOfHashes.wdx
+defaultdir=LotsOfHashes
+Readme=readme.txt

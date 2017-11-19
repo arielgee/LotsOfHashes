@@ -1,0 +1,137 @@
+
+###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++###
+#+ 1) log in http://www.totalcmd.net
+#+ 2) log in http://ghisler.ch
+#+ 3) write down the download count for 1.3
+
+##################################################################################################
+## Text in www.totalcmd.net
+
+###############################
+## Version
+1.4
+
+###############################
+## File Size (Kb)
+281
+
+###############################
+## Description in English
+LotsOfHashes is a simple 32/64-bit content-plugin for Total Commander.
+LotsOfHashes is able to calculate and display hash values for any file.
+
+Existing similar plugins (<a href="http://www.totalcmd.net/plugring/hsys.html">HashSys</a> and <a href="http://www.totalcmd.net/plugring/wdhash.html">wdHash</a>) do not currently provide a 64-bit version.
+
+The following 47 hash algorithms are currently supported:
+ (CRC32), (CRC32b), (eD2k/eMule), (GOST), (HAVAL 128,3),
+ (HAVAL 128,4), (HAVAL 128,5), (HAVAL 160,3), (HAVAL 160,4), (HAVAL 160,5),
+ (HAVAL 192,3), (HAVAL 192,4), (HAVAL 192,5), (HAVAL 224,3), (HAVAL 224,4),
+ (HAVAL 224,5), (HAVAL 256,3), (HAVAL 256,4), (HAVAL 256,5), (MD4),
+ (MD5), (Murmur 32), (Murmur 128), (RIPEMD 128), (RIPEMD 160),
+ (RIPEMD 256), (RIPEMD 320), (Salsa10), (Salsa20), (SHA1 160),
+ (SHA2 224), (SHA2 256), (SHA2 384), (SHA2 512), (SHA3 224),
+ (SHA3 256), (SHA3 384), (SHA3 512), (Snefru 128), (Snefru 256),
+ (Tiger 128,3), (Tiger 128,4), (Tiger 160,3), (Tiger 160,4), (Tiger 192,3),
+ (Tiger 192,4), (Whirlpool)
+
+###############################
+## What's new in English
+2013-12-01: v1.4
+* ADDED     SHA3 (Keccak) hash algorithm in now supported
+            (224-bit, 256-bit, 384-bit and 512-bit).
+* CHANGED   Shorted field name format of compare content
+            (removed the "codes" string).
+   
+2013-01-09: v1.3
+* CHANGED   A better way to handle errors after CreateFile.
+* CHANGED   Close the file handle after CreateFileMapping;
+            it's no longer needed.
+* ADDED     MurmurHash3 hash algorithm is now supported
+            (32-bit and 128-bit).
+* ADDED     Salsa10 and Salsa20 hash algorithms are now
+            supported.
+* CHANGED   Code refactoring: Rename methods of hash
+            classes (Crc32,EDonkey2k,Gost,Haval,Md4,Md5).
+
+2012-10-02: v1.2
+* FIXED    Minor bug in the way memory is freed in the
+           cache mechanism.
+* FIXED    Exception when file is empty. Check for zero
+           file size before accessing cache.
+* CHANGED  Remove dependency in Windows cryptography
+           (Wincrypt). MD5 and SHA1/SHA2 algorithms
+           re-implemented.
+* ADDED    SHA2 224 hash algorithm is now supported.
+* CHANGED  Current CRC32 algorithm was renamed to CRC32b
+           (algorithm used by PKZIP).
+* ADDED    CRC32 hash algorithm (used by ethernet and
+           wdHash) is now supported.
+
+2012-09-23: v1.1
+* FIXED    Missing ANSI functions added in addition to
+           existing Unicode functions.
+* CHANGED  32bit file extension renamed from .uwdx to .wdx.
+           LotsOfHashes.uwdx is obsolete and can safely be
+           deleted.
+* ADDED    MD4 hash algorithm is now supported.
+* ADDED    eD2k/eMule hash algorithm is now supported.
+* CHANGED  Field names slightly modified for better
+           categorization.
+           Format: "hash_name [digest_size],[passes]".
+* ADDED    Two new field units/choices.
+           'Delimited uppercase' and 'Delimited lowercase'.
+* ADDED    In-memory cache for performance (avoid
+           recalculation of large unchanged files).
+* ADDED    Configuration file (LotsOfHashes.ini) for
+           cache parameters. See Notes.
+* FIXED    Doesn't ignore directories.
+
+2012-08-29: v1.0
+* Initial release.
+
+## Last What's new in English
+2013-12-01: v1.4
+* ADDED     SHA3 (Keccak) hash algorithm in now supported
+            (224-bit, 256-bit, 384-bit and 512-bit).
+* CHANGED   Shorted field name format of compare content
+            (removed the "codes" string).
+
+
+##################################################################################################
+## Profile Signature
+[url=http://www.totalcmd.net/plugring/LotsOfHashes.html][size=11]LotsOfHashes v1.4: Calculate file hash values (content plugin).[/size][/url]
+
+
+##################################################################################################
+## The first post (edited)
+LotsOfHashes is a simple 32/64-bit content-plugin able to calculate and display hash values for any file.
+
+[b]Current Version 1.4 released on October 7, 2013[/b]
+
+[url=http://www.totalcmd.net/plugring/LotsOfHashes.html]Download LotsOfHashes v1.4[/url].
+
+Existing similar plugins ([url=http://www.totalcmd.net/plugring/hsys.html]HashSys[/url] and [url=http://www.totalcmd.net/plugring/wdhash.html]wdHash[/url]) do not currently provide a 64-bit version.
+
+The following 47 hash algorithms are currently supported:
+(CRC32), (CRC32b), (eD2k/eMule), (GOST), (HAVAL 128,3),
+(HAVAL 128,4), (HAVAL 128,5), (HAVAL 160,3), (HAVAL 160,4), (HAVAL 160,5),
+(HAVAL 192,3), (HAVAL 192,4), (HAVAL 192,5), (HAVAL 224,3), (HAVAL 224,4),
+(HAVAL 224,5), (HAVAL 256,3), (HAVAL 256,4), (HAVAL 256,5), (MD4),
+(MD5), (Murmur 32), (Murmur 128), (RIPEMD 128), (RIPEMD 160),
+(RIPEMD 256), (RIPEMD 320), (Salsa10), (Salsa20), (SHA1 160),
+(SHA2 224), (SHA2 256), (SHA2 384), (SHA2 512), (SHA3 224),
+(SHA3 256), (SHA3 384), (SHA3 512), (Snefru 128), (Snefru 256),
+(Tiger 128,3), (Tiger 128,4), (Tiger 160,3), (Tiger 160,4), (Tiger 192,3),
+(Tiger 192,4), (Whirlpool)
+
+
+[b][u]New in version 1.4:[/u][/b]
+[list]ADDED - SHA3 (Keccak) hash algorithm in now supported (224-bit, 256-bit, 384-bit and 512-bit).
+CHANGED - Shorted field name format of compare content (removed the "codes" string).[/list]
+
+
+##################################################################################################
+## The new post
+[url=http://www.totalcmd.net/plugring/LotsOfHashes.html][b]Download New Version (LotsOfHashes v1.4)[/b][/url]
+
+ADDED - SHA3 (Keccak) hash algorithm in now supported (224-bit, 256-bit, 384-bit and 512-bit).

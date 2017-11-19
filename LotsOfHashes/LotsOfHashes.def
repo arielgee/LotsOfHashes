@@ -1,0 +1,14 @@
+; LotsOfHashes.def : Declares the module parameters for the DLL.
+
+LIBRARY
+
+EXPORTS
+	ContentGetDetectString
+	ContentGetSupportedField
+	ContentGetValue
+	ContentGetValueW
+	ContentStopGetValue
+	ContentStopGetValueW
+	ContentCompareFiles
+	ContentCompareFilesW
+	ContentPluginUnloading
