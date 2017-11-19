@@ -1,0 +1,116 @@
+void CCache::_test()
+{
+	static int	times = 0;
+
+	FILETIME			ft1 = {242, 338};
+	FILETIME			ft2 = {123, 987};
+	BYTE				cHash1[] = {0xA1, 0xB2, 0xC3, 0xA4, 0xB5, 0xC6};
+	BYTE				cHash2[] = {0xC9, 0xC8, 0xC7, 0xC6, 0xC5, 0xC4};
+	BYTE				cHash3[] = {0x1F, 0x2F, 0xFF, 0xFF};
+	CFileHash*		pfh;
+	DWORD				size;
+	const BYTE*		pcH;
+
+	mapCache_t::size_type		t_size = m_mapCache.max_size();
+
+	freeEmpties();
+
+	freeMem();
+
+	if( m_mapCache.empty() )
+	{
+		//--------------------------------
+		// +++ fill the map
+		if(this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\explorer.exe", 7) == CCache::iof_Inserted)		pfh->SetHash(cHash1, 6);
+		if(this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\jvm.map", 7) == CCache::iof_Inserted)				pfh->SetHash(cHash2, 6);
+		if(this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3) == CCache::iof_Inserted)	pfh->SetHash(cHash3, 4);
+		if(this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oraplp11.dll", 7) == CCache::iof_Inserted)		pfh->SetHash(cHash2, 6);
+		if(this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\ojdbc5_g.jar", 7) == CCache::iof_Inserted)		pfh->SetHash(cHash1, 6);
+		if(this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\M1033DSK.UNT", 7) == CCache::iof_Inserted)		pfh->SetHash(cHash2, 6);
+	}	
+
+	if( !m_mapCache.empty() )
+	{
+		insertOrFind_t	iofRet;
+
+		//--------------------------------
+		// +++ scan the map
+		for(iteratorCache_t itr = m_mapCache.begin(); itr != m_mapCache.end(); itr++)
+			pfh = itr->second;
+
+
+		freeEmpties();
+
+		//--------------------------------
+		// +++ try to fill existing
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\explorer.exe", 7)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\jvm.map", 7)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oraplp11.dll", 7)) == CCache::iof_Found)			pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\ojdbc5_g.jar", 7)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\M1033DSK.UNT", 7)) == CCache::iof_Found)	pcH = pfh->GetHash(size);
+
+		//--------------------------------
+		// +++ delete the object in the map WITOUT erase
+		for(iteratorCache_t itr = m_mapCache.begin(); itr != m_mapCache.end(); itr++)
+		{
+			delete (itr->second);
+			(itr->second) = NULL;
+		}
+
+		freeEmpties();
+
+		//--------------------------------
+		// +++ try to fill existing that were deleted
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\explorer.exe", 7)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\jvm.map", 7)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oraplp11.dll", 7)) == CCache::iof_Found)			pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\ojdbc5_g.jar", 7)) == CCache::iof_Found)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\M1033DSK.UNT", 7)) == CCache::iof_Found)	pcH = pfh->GetHash(size);
+
+		//--------------------------------
+		// +++ insert to find in the map 1
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3)) == CCache::iof_Found)
+			pfh->SetHash(cHash1, 6);
+
+		//--------------------------------
+		// +++ try to fill existing with LW modified
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\explorer.exe", 7)) == CCache::iof_FoundNeedUpdate)	pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\jvm.map", 7)) == CCache::iof_FoundNeedUpdate)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3)) == CCache::iof_FoundNeedUpdate)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oraplp11.dll", 7)) == CCache::iof_FoundNeedUpdate)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\ojdbc5_g.jar", 7)) == CCache::iof_FoundNeedUpdate)		pcH = pfh->GetHash(size);
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\M1033DSK.UNT", 7)) == CCache::iof_FoundNeedUpdate)	pcH = pfh->GetHash(size);
+
+		//--------------------------------
+		// +++ find not existing map
+		pfh = this->find(L"c:\\_test\\99chunks", 3);
+
+		//--------------------------------
+		// +++ find in map
+		pfh = this->find(L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3);
+
+		//--------------------------------
+		// +++ remove not existing from the map
+		this->Remove(L"c:\\_test\\9chunks", 3);
+
+		//--------------------------------
+		// +++ remove from the map
+		this->Remove(L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\oracommon11.dll", 3);
+
+		//--------------------------------
+		// +++ insert to find in the map 2
+		if( (iofRet = this->InsertOrFind(&pfh, L"c:\\Users\\arielg\\Temp\\moreICONS\\single\\code cmp\\M1033DSK.UNT", 7)) == CCache::iof_Found)
+			iofRet = iofRet;
+		else if( iofRet == CCache::iof_Inserted)
+			pfh->SetHash(cHash2, 6);
+	}
+
+	freeMem();
+
+	
+	// recursively do this _test twice.
+	if( (++times) < 2 )
+		this->_test();	
+}
